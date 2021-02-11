@@ -1,7 +1,7 @@
 urxvt.scrollBar:	false
 urxvt.blurRadius: 20
 urxvt.depth: 32
-urxvt.font: xft:Anonymous Pro:size=11
+urxvt.font: xft:Consolas:size=11
 
 ! hard contrast: *background: #1d2021
 *background: rgba:0000/0000/0000/a000

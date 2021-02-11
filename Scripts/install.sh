@@ -2,19 +2,39 @@
 
 sudo apt update && sudo apt upgrade
 
+#copy dotfiles
+cd ..
+cp .* ~
+cp -r .config ~
+
+#install consolas font
+sudo cp ../Consolas.ttf /usr/share/fonts/
+fc-cache -f -v
 
 #common programs
-sudo apt install transmission vim vlc ranger firefox rxvt-unicode
+sudo apt install transmission vim vlc ranger chromium rxvt-unicode
 
 #basic utility programs
-sudo apt install blueman-applet nm-applet mate-volume-control-applet feh redshift
+sudo apt install blueman network-manager network-manager-gnome mate-applets feh redshift xorg
 
 #show-off programs
 sudo apt install neofetch
 
+
+mkdir ~/Github/
+
 #tryone's 144 blur optimized compton
-mkdir ~/Github/ && cd ~/Github
+cd ~/Github
 git clone https://github.com/tryone144/compton
+cd compton
+sudo apt install libx11-dev libxcomposite-dev libxdamage-dev libxfixes-dev libxext-dev libxrender-dev libxrandr-dev libxinerama-dev pkg-config build-essential x11proto-dev x11-utils libpcre++-dev libconfig-dev libdrm-dev libgl-dev libdbus-1-dev asciidoc
+make
+make docs
+sudo make install
 
 #i3 gaps from git (needed on debian)
-git clone https://github.com/Airblader/i3
+cd ~/Github
+git clone https://github.com/maestrogerardo/i3-gaps-deb
+cd i3-gaps-deb
+./i3-gaps-deb
+
