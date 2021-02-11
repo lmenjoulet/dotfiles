@@ -1,0 +1,6 @@
+#!/bin/bash
+
+scrot /tmp/current.png
+convert -blur 0x15 /tmp/current.png /tmp/blur.png
+composite -gravity center ~/Pictures/debian_logo.png /tmp/blur.png /tmp/lock.png
+i3lock -i /tmp/lock.png
