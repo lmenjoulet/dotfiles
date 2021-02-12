@@ -8,7 +8,7 @@ cp .* ~
 cp -r .config ~
 
 #install consolas font
-sudo cp ../Consolas.ttf /usr/share/fonts/
+sudo cp Consolas.ttf /usr/share/fonts/
 fc-cache -f -v
 
 #common programs

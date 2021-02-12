@@ -35,7 +35,7 @@ bindsym $mod+Shift+s exec lock
 exec --no-startup-id nm-applet
 
 #Audio control applet
-exec --no-startup-id mate-volume-control-applet
+exec --no-startup-id mate-volume-control-status-icon
 
 #Bluetooth applet
 exec --no-startup-id blueman-applet
