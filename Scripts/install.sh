@@ -15,7 +15,7 @@ fc-cache -f -v
 sudo apt install transmission vim vlc ranger chromium rxvt-unicode
 
 #basic utility programs
-sudo apt install blueman network-manager network-manager-gnome mate-applets feh redshift xorg
+sudo apt install blueman network-manager network-manager-gnome mate-applets feh redshift xorg brightnessctl
 
 #show-off programs
 sudo apt install neofetch
