@@ -189,8 +189,21 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+mode "keyboard"{
+	#allows to switch between color presets
+	#just add more keybindings to have more presets
+	
+	bindsym Up exec "msi-keyboard -m normal -c left,blue,high -c middle,white,high -c right,red,high"	
+	bindsym Down exec "msi-keyboard -m normal -c left,red,high -c middle,red,high -c right,red,high"
+	bindsym Left exec "msi-keyboard -m normal -c left,green,high -c middle,green,high -c right,green,high"
+	bindsym Right exec "msi-keyboard -m normal -c left,orange,high -c middle,orange,low -c right,orange,high"
+	
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+	bindsym $mod+u mode "default"	
+}
 
-
+bindsym $mod+u mode "keyboard"
 
 # i3 gaps settings
 for_window [class="^.*"] border pixel 3
@@ -202,12 +215,9 @@ smart_gaps on
 #Background
 exec --no-startup-id feh --bg-fill /home/aouh/Pictures/Wallpapers/peripheral.jpg
 
-#Clipboard
-exec --no-startup-id parcellite
-
 #Redshift
-
 exec --no-startup-id redshift
+
 #Gruvbox colorscheme
 # class                 bd      bg      txt     ind     child_bd
 client.focused          #282828 #fbf1c7 #282828 #282828 #fbf1c7
@@ -221,5 +231,5 @@ exec --no-startup-id compton
 # finds out, if available)
 bar {
 	status_command i3status
-	font pango:Anonymous pro
+	font pango:Consolas
 }
