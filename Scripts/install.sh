@@ -12,7 +12,7 @@ sudo cp Consolas.ttf /usr/share/fonts/
 fc-cache -f -v
 
 #common programs
-sudo apt install transmission vim vlc ranger chromium rxvt-unicode
+sudo apt install transmission vim vlc ranger chromium rxvt-unicode cmus
 
 #basic utility programs
 sudo apt install blueman network-manager network-manager-gnome mate-applets feh redshift xorg brightnessctl
@@ -38,3 +38,7 @@ git clone https://github.com/maestrogerardo/i3-gaps-deb
 cd i3-gaps-deb
 ./i3-gaps-deb
 
+#discord install
+cd ~
+wget https://discord.com/api/download?platform=linux&format=deb
+sudo dpkg -i discord-*.deb && rm discord-*.deb
