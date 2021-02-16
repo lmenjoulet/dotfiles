@@ -3,9 +3,7 @@
 sudo apt update && sudo apt upgrade
 
 #copy dotfiles
-cd ..
-cp .* ~
-cp -r .config ~
+cp -r .config ~ && cp .bashrc ~ && cp .xinitrc ~ && cp .Xdefaults ~ && echo "Config files copied"
 
 #install consolas font
 sudo cp Consolas.ttf /usr/share/fonts/
@@ -15,8 +13,8 @@ fc-cache -f -v
 sudo apt install transmission vim vlc ranger chromium rxvt-unicode cmus
 
 #basic utility programs
-sudo apt install blueman network-manager network-manager-gnome mate-applets feh redshift xorg brightnessctl
-
+sudo apt install blueman network-manager network-manager-gnome mate-applets feh redshift xorg brightnessctl polybar
+	
 #show-off programs
 sudo apt install neofetch
 
@@ -41,4 +39,4 @@ cd i3-gaps-deb
 #discord install
 cd ~
 wget https://discord.com/api/download?platform=linux&format=deb
-sudo dpkg -i discord-*.deb && rm discord-*.deb
+sudo apt install discord-*.deb && rm discord-*.deb
