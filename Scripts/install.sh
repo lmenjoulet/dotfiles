@@ -6,14 +6,14 @@ sudo apt update && sudo apt upgrade
 cp -r .config ~ && cp .bashrc ~ && cp .xinitrc ~ && cp .Xdefaults ~ && echo "Config files copied"
 
 #install consolas font
-sudo cp Consolas.ttf /usr/share/fonts/
+sudo cp -r Fonts/* /usr/share/fonts/
 fc-cache -f -v
 
 #common programs
 sudo apt install transmission vim vlc ranger chromium rxvt-unicode cmus
 
 #basic utility programs
-sudo apt install blueman network-manager network-manager-gnome mate-applets feh redshift xorg brightnessctl polybar
+sudo apt install blueman network-manager network-manager-gnome feh redshift xorg brightnessctl polybar pavucontrol powerline-fonts
 	
 #show-off programs
 sudo apt install neofetch
