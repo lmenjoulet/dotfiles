@@ -5,5 +5,5 @@ My config files, the install script that sets up everything needs to be launched
 ./Scripts/install.sh
 ```
 
-but if you're not me, I certainly wouldn't recommend it, It would be more productive to gather my dotfiles (you know where to).
+but if you're not me, I certainly wouldn't recommend it, It would be more productive to gather specific config files.
 
