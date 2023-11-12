@@ -1,0 +1,23 @@
+plugins: inline fetchart embedart convert mbsync
+
+library: ~/Musique/beets_library.db
+directory: ~/Musique
+
+import:
+  write: true
+  copy: true
+per_disc_numbering: true
+item_fields:
+  multidisc: 1 if disctotal > 1 else 0
+paths:
+  default: $albumartist/$album%aunique{}/%if{$multidisc,Disc $disc/}$track $title
+
+convert:
+  auto: true
+  format: opus
+  formats:
+    opus: ffmpeg -i $source -y -c:a libopus -b:a 128k $dest
+
+fetchart:
+  maxwidth: 1000
+  max_filesize: 512000
