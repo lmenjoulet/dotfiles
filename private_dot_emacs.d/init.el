@@ -98,16 +98,20 @@
 (general-define-key
  :states 'normal
  :prefix ";"
- "cf" 'chezmoi-find)
+ "cf" #'chezmoi-find)
 (general-define-key
  :states 'normal
  :prefix ";"
- "cs" 'chezmoi-write)
+ "cs" #'chezmoi-write)
 
 ;; magit
 (unless (package-installed-p 'magit)
   (package-install 'magit))
 (require 'magit)
+(general-define-key
+ :states 'normal
+ :prefix ";"
+ "m" 'magit)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

@@ -1,0 +1,8 @@
+[user]
+	name = Loup Menjoulet
+	email = lmenjoulet@laposte.net
+[credential "https://dev.azure.com"]
+	useHttpPath = true
+[credential]
+	helper = cache --timeout 7200
+	helper = oauth
