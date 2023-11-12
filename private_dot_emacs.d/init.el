@@ -63,11 +63,7 @@
 
 ;; disable line number in terminal mode
 (add-hook 'term-mode-hook (lambda () (display-line-numbers-mode 0)))
-(add-hook 'treemacs-mode-hook
-	  (lambda ()
-	    (display-line-numbers-mode 0)
-	    (set-face-background 'hl-line "black")))
-
+(add-hook 'eshell-mode-hook (lambda () (display-line-numbers-mode 0)))
 
 ;; directory tree
 (unless (package-installed-p 'treemacs)
@@ -80,6 +76,10 @@
  :states 'normal
  :prefix ";"
  "t" 'treemacs)
+(add-hook 'treemacs-mode-hook
+	  (lambda ()
+	    (display-line-numbers-mode 0)
+	    (set-face-background 'hl-line "black")))
 
 ;; markdown config
 (unless (package-installed-p 'markdown-mode)
