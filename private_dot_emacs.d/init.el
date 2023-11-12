@@ -91,6 +91,24 @@
 (require 'nix-mode)
 (add-to-list 'auto-mode-alist '("\\.nix\\'" . nix-mode))
 
+;; dotfiles management
+(unless (package-installed-p 'chezmoi)
+  (package-install 'chezmoi))
+(require 'chezmoi)
+(general-define-key
+ :states 'normal
+ :prefix ";"
+ "cf" 'chezmoi-find)
+(general-define-key
+ :states 'normal
+ :prefix ";"
+ "cs" 'chezmoi-write)
+
+;; magit
+(unless (package-installed-p 'magit)
+  (package-install 'magit))
+(require 'magit)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
