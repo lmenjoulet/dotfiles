@@ -11,6 +11,10 @@
 ;; utf-8
 (prefer-coding-system 'utf-8)
 
+;; hide lockfiles
+(setq-default lock-file-name-transforms
+              `((".*" ,(expand-file-name "~/.emacs.d/lockfiles") t)))
+
 ;; vim mode
 (unless (package-installed-p 'evil)
   (package-install 'evil))
@@ -81,10 +85,15 @@
 	    (display-line-numbers-mode 0)
 	    (set-face-background 'hl-line "black")))
 
+;; word wrap
+(add-hook 'text-mode-hook #'auto-fill-mode)
+(setq-default fill-column 80)
+
 ;; markdown config
 (unless (package-installed-p 'markdown-mode)
   (package-install 'markdown-mode))
 (setq markdown-enable-wiki-links 't)
+
 ;; nix config
 (unless (package-installed-p 'nix-mode)
   (package-install 'nix-mode))
