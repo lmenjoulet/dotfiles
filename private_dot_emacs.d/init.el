@@ -100,6 +100,11 @@
 (require 'nix-mode)
 (add-to-list 'auto-mode-alist '("\\.nix\\'" . nix-mode))
 
+;; powershell config
+(unless (package-installed-p 'powershell)
+  (package-install 'powershell))
+(add-to-list 'auto-mode-alist '("\\.ps1\\'" . powershell-mode))
+
 ;; dotfiles management
 (unless (package-installed-p 'chezmoi)
   (package-install 'chezmoi))
