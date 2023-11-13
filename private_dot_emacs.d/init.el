@@ -154,7 +154,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(poly-markdown nix-mode treesit-auto tree-sitter-langs general evil-collection markdown-preview-mode markdown-mode ample-theme evil-smartparens smartparens-config centered-cursor-mode evil)))
+   '(poly-markdown nix-mode general evil-collection markdown-preview-mode markdown-mode ample-theme evil-smartparens smartparens-config centered-cursor-mode evil)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
