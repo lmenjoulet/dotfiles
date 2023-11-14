@@ -92,6 +92,10 @@
 (add-hook 'text-mode-hook #'auto-fill-mode)
 (setq-default fill-column 80)
 
+;; indentation
+(setq indent-tabs-mode nil)
+(setq tab-width 2)
+
 ;; markdown config
 (unless (package-installed-p 'markdown-mode)
   (package-install 'markdown-mode))
@@ -133,6 +137,16 @@
  :states 'normal
  :prefix ";"
  "m" 'magit)
+
+;; bar
+(unless (package-installed-p 'telephone-line)
+  (package-install 'telephone-line))
+(require 'telephone-line)
+(setq telephone-line-primary-left-separator 'telephone-line-flat
+      telephone-line-secondary-left-separator 'telephone-line-flat
+      telephone-line-primary-right-separator 'telephone-line-flat
+      telephone-line-secondary-right-separator 'telephone-line-flat)
+(telephone-line-mode 1)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
