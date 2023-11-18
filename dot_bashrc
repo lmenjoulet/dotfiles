@@ -1,2 +1,2 @@
-export EDITOR='emacsclient -c'
+export EDITOR='vim'
 export PS1="\033[32m[\u@\h:\w] $ \033[0m"
