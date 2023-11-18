@@ -1,6 +1,0 @@
-[user]
-	name = Loup Menjoulet
-	email = lmenjoulet@laposte.net
-
-[credential]
-	helper = manager-oauth
