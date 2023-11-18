@@ -13,6 +13,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-fugitive'
 Plug 'chrisbra/csv.vim'
+Plug 'sheerun/vim-polyglot'
 call plug#end()
 
 colorscheme base16-default-dark
