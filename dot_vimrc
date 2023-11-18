@@ -20,3 +20,6 @@ call plug#end()
 
 colorscheme base16-default-dark
 let g:airline_theme='base16'
+
+" for polyglot
+set nocompatible
