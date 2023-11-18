@@ -1,6 +1,6 @@
 call plug#begin()
 
-Plug 'sheerum/vimrc'
+Plug 'sheerun/vimrc'
 Plug 'chriskempson/base16-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
