@@ -1,12 +1,6 @@
-set number relativenumber
-set splitright splitbelow
-set scrolloff=999
-set expandtab tabstop=2 shiftwidth=0
-set clipboard=unnamedplus
-set termguicolors
-
 call plug#begin()
 
+Plug 'sheerum/vimrc'
 Plug 'chriskempson/base16-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -21,5 +15,3 @@ call plug#end()
 colorscheme base16-default-dark
 let g:airline_theme='base16'
 
-" for polyglot
-set nocompatible
