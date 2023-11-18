@@ -1,14 +1,24 @@
 call plug#begin()
 
+" Sane defaults
 Plug 'sheerun/vimrc'
+
+" Appearance
 Plug 'chriskempson/base16-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+
 Plug 'jiangmiao/auto-pairs'
+
+" Git
 Plug 'tpope/vim-fugitive'
+
+
 Plug 'chrisbra/csv.vim'
 Plug 'sheerun/vim-polyglot'
-Plug 'vim-autoformat/vim-autoformat'
+
+"Doc browser
+Plug 'KabbAmine/zeavim.vim'
 
 call plug#end()
 
