@@ -82,5 +82,9 @@ require("lazy").setup{
       vim.keymap.set('n', '<leader>ft', builtin.live_grep, {})  -- external dependency on ripgrep
       vim.keymap.set('n', '<leader>fh', builtin.help_tags, {}) 
     end
+  },
+  {
+    'jakewvincent/mkdnflow.nvim',
+    ft = "markdown"
   }
 }
