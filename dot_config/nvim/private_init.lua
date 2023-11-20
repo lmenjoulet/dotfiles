@@ -85,6 +85,7 @@ require("lazy").setup{
   },
   {
     'jakewvincent/mkdnflow.nvim',
-    ft = "markdown"
+    ft = "markdown",
+    opts = {}
   }
 }
