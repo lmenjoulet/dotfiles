@@ -4,6 +4,11 @@
 (package-initialize)
 ;; (package-refresh-contents) ;; only to update
 
+;; ensure emacs server is running
+(require 'server)
+(unless (server-running-p)
+  (server-start))
+
 ;; disable splash screen
 (setq inhibit-startup-message t) 
 (setq initial-scratch-message nil)

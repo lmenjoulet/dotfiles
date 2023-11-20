@@ -1,8 +1,10 @@
 [user]
 	name = Loup Menjoulet
 	email = lmenjoulet@laposte.net
+{{- if eq .chezmoi.os "linux"}}
 [credential "https://dev.azure.com"]
 	useHttpPath = true
 [credential]
 	helper = cache --timeout 7200
 	helper = oauth
+{{- end}}

@@ -1,5 +1,6 @@
-call plug#begin()
+profile start ~/vimprof
 
+call plug#begin()
 " Sane defaults
 Plug 'sheerun/vimrc'
 
@@ -22,6 +23,13 @@ Plug 'KabbAmine/zeavim.vim'
 
 call plug#end()
 
+set termguicolors
 colorscheme base16-default-dark
 let g:airline_theme='base16'
+
+{{- if eq .chezmoi.os "windows"}}
+set lazyredraw
+nnoremap <silent> j j:redraw<CR>
+nnoremap <silent> k k:redraw<CR>
+{{- end}}
 
