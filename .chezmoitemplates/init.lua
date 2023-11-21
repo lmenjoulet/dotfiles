@@ -92,5 +92,26 @@ require("lazy").setup{
         section_separators = { left = "", right = ""},
       }
     }
-  }
+  },
+  {
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    ft = { "markdown" },
+    build = "cd app && npm install"
+  },
+  {
+    "jakewvincent/mkdnflow.nvim",
+    ft = "markdown",
+    opts = {}
+  },
+    {
+      "NeogitOrg/neogit",
+      dependencies = {
+        "nvim-lua/plenary.nvim",         -- required
+        "nvim-telescope/telescope.nvim", -- optional
+        "sindrets/diffview.nvim",        -- optional
+        -- "ibhagwan/fzf-lua",              -- optional
+      },
+      config = true
+    }
 }
