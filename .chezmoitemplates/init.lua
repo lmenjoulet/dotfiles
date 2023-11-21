@@ -9,7 +9,7 @@ vim.o.expandtab = true
 vim.o.cursorline = true
 vim.o.splitright = true
 vim.opt.termguicolors = true
-
+vim.o.signcolumn = "yes"
 vim.opt.clipboard = "unnamedplus"
 vim.g.mapleader = " "
 
@@ -17,13 +17,12 @@ vim.g.mapleader = " "
 vim.api.nvim_create_autocmd(
   "BufEnter",
   {
-  pattern = { "*.txt", "*.tex", "*.md" },
-  command = "set tw=80 fo+=t fo-=l",
+    pattern = { "*.txt", "*.tex", "*.md" },
+    command = "set tw=80 fo+=t fo-=l",
   }
 )
 
 -- packages
-
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -37,23 +36,23 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup{
+require("lazy").setup {
   {
     "RRethy/nvim-base16",
     lazy = false,
     priority = 1000,
-    config = function ()
+    config = function()
       vim.cmd "colorscheme base16-default-dark"
     end
   },
-  { 
+  {
     'windwp/nvim-autopairs',
     event = "InsertEnter",
     opts = {}
   },
   {
     "nvim-treesitter/nvim-treesitter",
-    config = function () 
+    config = function()
       require("nvim-treesitter.configs").setup {
         ensure_installed = "all",
         highlight = {
@@ -63,24 +62,26 @@ require("lazy").setup{
         indent = {
           enable = true
         }
-      }    
+      }
       vim.wo.foldmethod = "expr"
       vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
       vim.opt.foldenable = false
       vim.opt.fillchars = "fold: "
       vim.opt.foldlevel = 99
-      vim.o.foldtext = "substitute(getline(v:foldstart),'\\\\t',repeat('\\ ',&tabstop),'g').'...'.trim(getline(v:foldend)) . ' (' . (v:foldend - v:foldstart + 1) . ' lines)'"
+      vim.o.foldtext =
+      "substitute(getline(v:foldstart),'\\\\t',repeat('\\ ',&tabstop),'g').'...'.trim(getline(v:foldend)) . ' (' . (v:foldend - v:foldstart + 1) . ' lines)'"
     end
   },
   {
-    "nvim-telescope/telescope.nvim", branch = "0.1.x",
+    "nvim-telescope/telescope.nvim",
+    branch = "0.1.x",
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
       local builtin = require("telescope.builtin")
-      vim.keymap.set('n', '<leader>fb', builtin.buffers, {}) 
-      vim.keymap.set('n', '<leader>ff', builtin.find_files, {}) 
-      vim.keymap.set('n', '<leader>ft', builtin.live_grep, {})  -- external dependency on ripgrep
-      vim.keymap.set('n', '<leader>fh', builtin.help_tags, {}) 
+      vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
+      vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
+      vim.keymap.set('n', '<leader>ft', builtin.live_grep, {}) -- external dependency on ripgrep
+      vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
     end
   },
   {
@@ -88,8 +89,8 @@ require("lazy").setup{
     opts = {
       options = {
         icons_enabled = false,
-        component_separators = { left = "", right = ""},
-        section_separators = { left = "", right = ""},
+        component_separators = { left = "", right = "" },
+        section_separators = { left = "", right = "" },
       }
     }
   },
@@ -125,38 +126,70 @@ require("lazy").setup{
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
+      "neovim/nvim-lspconfig",
+      "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-cmdline",
-      "hrsh7th/cmp-vsnip",
+      "L3MON4D3/LuaSnip",
       "petertriho/cmp-git"
     },
-    conf = function ()
-
+    config = function()
+      vim.opt.pumheight = 10
       local cmp = require("cmp")
 
-      cmp.setup{
+      cmp.setup {
+        completion = {
+          completeopt = "menu,menuone,insert"
+        },
         snippet = {
           expand = function(args)
-            vim.fn["vsnip#anonymous"](args.body)
+            require("luasnip").lsp_expand(args.body)
           end
         },
         mapping = {
-          ["<Space>"] = cmp.mapping.complete(),
-          ["<Tab>"] = cmp.mapping.confirm {select = true},
+          ["<Tab>"] = cmp.mapping.confirm { select = true },
+          ["<C-k>"] = cmp.mapping.select_prev_item(),
+          ["<C-j>"] = cmp.mapping.select_next_item(),
         },
         sources = cmp.config.sources {
-          { name = "vsnip" },
-          { name = "path"  },
+          { name = "nvim_lsp" },
+          { name = "luasnip" },
+          { name = "path" },
         }
       }
 
       cmp.setup.filetype("gitcommit", {
-        sources = cmp.config.sources { {name = "git"} } 
+        sources = cmp.config.sources { { name = "git" } }
       })
 
       cmp.setup.cmdline(":", {
-        sources = cmp.config.sources({ {name = "path"} },{ {name = "cmdline"} })
+        sources = cmp.config.sources({ { name = "path" } }, { { name = "cmdline" } })
       })
+      local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+      require("lspconfig")["nil_ls"].setup { capabilities = capabilities }
+      require("lspconfig")["lua_ls"].setup {
+        capabilities = capabilities,
+        settings = {
+          Lua = {
+            runtime = { version = "LuaJIT" },
+            diagnostics = { globals = { "vim" } },
+            workspace = {
+              library = {
+                vim.fn.expand "$VIMRUNTIME/lua",
+                vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"
+              }
+            }
+          }
+        }
+      }
+      require("lspconfig")["marksman"].setup { capabilities = capabilities }
     end
-  }
+  },
 }
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+  callback = function()
+    vim.lsp.buf.format { async = false }
+  end
+})
