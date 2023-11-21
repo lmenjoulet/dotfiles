@@ -8,3 +8,7 @@
 	helper = cache --timeout 7200
 	helper = oauth
 {{- end}}
+{{- if eq .chezmoi.os "windows"}}
+[credential "helperselector"]
+	selected = manager
+{{- end}}

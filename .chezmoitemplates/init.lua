@@ -104,14 +104,22 @@ require("lazy").setup{
     ft = "markdown",
     opts = {}
   },
-    {
-      "NeogitOrg/neogit",
-      dependencies = {
-        "nvim-lua/plenary.nvim",         -- required
-        "nvim-telescope/telescope.nvim", -- optional
-        "sindrets/diffview.nvim",        -- optional
-        -- "ibhagwan/fzf-lua",              -- optional
-      },
-      config = true
+  {
+    "NeogitOrg/neogit",
+    dependencies = {
+      "nvim-lua/plenary.nvim",         -- required
+      "nvim-telescope/telescope.nvim", -- optional
+      "sindrets/diffview.nvim",        -- optional
+    },
+    config = true
+  },
+  {
+    "akinsho/toggleterm.nvim",
+    cmd = "ToggleTerm",
+    keys = "<leader>t",
+    opts = {
+      open_mapping = "<leader>t",
+      direction = "float"
     }
+  }
 }
