@@ -121,5 +121,42 @@ require("lazy").setup{
       open_mapping = "<leader>t",
       direction = "float"
     }
+  },
+  {
+    "hrsh7th/nvim-cmp",
+    dependencies = {
+      "hrsh7th/cmp-path",
+      "hrsh7th/cmp-cmdline",
+      "hrsh7th/cmp-vsnip",
+      "petertriho/cmp-git"
+    },
+    conf = function ()
+
+      local cmp = require("cmp")
+
+      cmp.setup{
+        snippet = {
+          expand = function(args)
+            vim.fn["vsnip#anonymous"](args.body)
+          end
+        },
+        mapping = {
+          ["<Space>"] = cmp.mapping.complete(),
+          ["<Tab>"] = cmp.mapping.confirm {select = true},
+        },
+        sources = cmp.config.sources {
+          { name = "vsnip" },
+          { name = "path"  },
+        }
+      }
+
+      cmp.setup.filetype("gitcommit", {
+        sources = cmp.config.sources { {name = "git"} } 
+      })
+
+      cmp.setup.cmdline(":", {
+        sources = cmp.config.sources({ {name = "path"} },{ {name = "cmdline"} })
+      })
+    end
   }
 }
