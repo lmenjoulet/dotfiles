@@ -11,7 +11,8 @@ vim.o.splitright = true
 vim.opt.termguicolors = true
 vim.o.signcolumn = "yes"
 vim.opt.clipboard = "unnamedplus"
-vim.g.mapleader = " "
+
+vim.g.mapleader = ";"
 
 -- length wrapping for text files
 vim.api.nvim_create_autocmd(
@@ -103,7 +104,14 @@ require("lazy").setup {
   {
     "jakewvincent/mkdnflow.nvim",
     ft = "markdown",
-    opts = {}
+    opts = {
+      links = {
+        style = "wiki",
+      },
+      perspective = {
+        priority = "current"
+      }
+    }
   },
   {
     "NeogitOrg/neogit",
