@@ -39,11 +39,11 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup {
   {
-    "RRethy/nvim-base16",
+    "Mofiqul/adwaita.nvim",
     lazy = false,
     priority = 1000,
     config = function()
-      vim.cmd "colorscheme base16-default-dark"
+      vim.cmd("colorscheme adwaita")
     end
   },
   {
@@ -92,6 +92,7 @@ require("lazy").setup {
         icons_enabled = false,
         component_separators = { left = "", right = "" },
         section_separators = { left = "", right = "" },
+        theme = "adwaita",
       }
     }
   },
