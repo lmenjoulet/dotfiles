@@ -23,6 +23,29 @@ vim.api.nvim_create_autocmd(
   }
 )
 
+-- disable search highlight on insert
+vim.api.nvim_create_autocmd(
+  "InsertEnter",
+  {
+    command = "setlocal nohlsearch"
+  }
+)
+
+local lsp_settings = {
+  lua_ls = {
+    Lua = {
+      runtime = { version = "LuaJIT" },
+      diagnostics = { globals = { "vim" } },
+      workspace = {
+        library = {
+          vim.fn.expand "$VIMRUNTIME/lua",
+          vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"
+        }
+      }
+    }
+  }
+}
+
 -- packages
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -174,27 +197,41 @@ require("lazy").setup {
       cmp.setup.cmdline(":", {
         sources = cmp.config.sources({ { name = "path" } }, { { name = "cmdline" } })
       })
-      local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
-      require("lspconfig")["nil_ls"].setup { capabilities = capabilities }
-      require("lspconfig")["lua_ls"].setup {
-        capabilities = capabilities,
-        settings = {
-          Lua = {
-            runtime = { version = "LuaJIT" },
-            diagnostics = { globals = { "vim" } },
-            workspace = {
-              library = {
-                vim.fn.expand "$VIMRUNTIME/lua",
-                vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"
-              }
-            }
-          }
-        }
-      }
-      require("lspconfig")["marksman"].setup { capabilities = capabilities }
     end
   },
+  {
+    "williamboman/mason.nvim",
+    dependencies = {
+      "williamboman/mason-lspconfig.nvim",
+      "neovim/nvim-lspconfig"
+    },
+    config = function()
+      require("mason").setup()
+      require("mason-lspconfig").setup {
+        ensure_installed = (function()
+          local servers = { "lua_ls", "marksman", "ltex" }
+
+          if vim.loop.os_uname().sysname == "Windows_NT" then
+            local win_servers = { "powershell_es" }
+            vim.list_extend(servers, win_servers)
+          elseif vim.loop.os_uname().sysname == "Linux" then
+            local lin_servers = { "nil_ls" }
+            vim.list_extend(servers, lin_servers)
+          end
+          return servers
+        end)()
+      }
+      require("mason-lspconfig").setup_handlers {
+        function(server_name)
+          require("lspconfig")[server_name].setup {}
+        end
+      }
+
+      for server, settings in pairs(lsp_settings) do
+        require("lspconfig")[server].setup { settings = settings }
+      end
+    end
+  }
 }
 
 vim.api.nvim_create_autocmd("BufWritePre", {
