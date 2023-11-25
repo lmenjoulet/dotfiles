@@ -215,36 +215,39 @@ require("lazy").setup {
     end
   },
   {
+    "hrsh7th/cmp-nvim-lsp",
+    dependencies = { "neovim/nvim-lspconfig" },
+    cond = vim.loop.os_uname().sysname == "Linux",
+    config = function()
+      local capabilities = require("cmp_nvim_lsp").default_capabilities()
+      local servers = { "lua_ls", "marksman", "ltex", "nil_ls" }
+      for _, server in pairs(servers) do
+        require("lspconfig")[server].setup {
+          capabilities = capabilities,
+          settings = lsp_settings[server]
+        }
+      end
+    end
+  },
+  {
     "williamboman/mason.nvim",
     dependencies = {
       "williamboman/mason-lspconfig.nvim",
       "neovim/nvim-lspconfig"
     },
+    cond = vim.loop.os_uname().sysname == "Windows_NT",
     config = function()
       require("mason").setup()
       require("mason-lspconfig").setup {
-        ensure_installed = (function()
-          local servers = { "lua_ls", "marksman", "ltex" }
-
-          if vim.loop.os_uname().sysname == "Windows_NT" then
-            local win_servers = { "powershell_es" }
-            vim.list_extend(servers, win_servers)
-          elseif vim.loop.os_uname().sysname == "Linux" then
-            local lin_servers = { "nil_ls" }
-            vim.list_extend(servers, lin_servers)
-          end
-          return servers
-        end)()
+        ensure_installed = { "lua_ls", "marksman", "ltex", "powershell_es" }
       }
       require("mason-lspconfig").setup_handlers {
-        function(server_name)
-          require("lspconfig")[server_name].setup {}
+        function(server)
+          require("lspconfig")[server].setup {
+            settings = lsp_settings[server]
+          }
         end
       }
-
-      for server, settings in pairs(lsp_settings) do
-        require("lspconfig")[server].setup { settings = settings }
-      end
     end
   }
 }
