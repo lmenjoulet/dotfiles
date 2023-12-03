@@ -220,7 +220,7 @@ require("lazy").setup {
     cond = vim.loop.os_uname().sysname == "Linux",
     config = function()
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
-      local servers = { "lua_ls", "marksman", "ltex", "nil_ls" }
+      local servers = { "lua_ls", "marksman", "ltex", "nil_ls", "tsserver", "pylsp" }
       for _, server in pairs(servers) do
         require("lspconfig")[server].setup {
           capabilities = capabilities,
