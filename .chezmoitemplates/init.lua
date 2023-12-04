@@ -239,7 +239,7 @@ require("lazy").setup {
     config = function()
       require("mason").setup()
       require("mason-lspconfig").setup {
-        ensure_installed = { "lua_ls", "marksman", "ltex", "powershell_es" }
+        ensure_installed = { "lua_ls", "marksman", "ltex", "powershell_es", "pylsp" }
       }
       require("mason-lspconfig").setup_handlers {
         function(server)
