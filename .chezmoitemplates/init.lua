@@ -74,16 +74,6 @@ require("lazy").setup {
       vim.cmd.colorscheme("oxocarbon")
     end
   },
-  --[[
-  {
-    "Mofiqul/adwaita.nvim",
-    lazy = false,
-    priority = 1000,
-    config = function()
-      vim.cmd("colorscheme adwaita")
-    end
-  },
-  --]]
   {
     'windwp/nvim-autopairs',
     event = "InsertEnter",
@@ -140,7 +130,6 @@ require("lazy").setup {
         icons_enabled = false,
         component_separators = { left = "", right = "" },
         section_separators = { left = "", right = "" },
-        theme = "adwaita",
       }
     }
   },
