@@ -67,6 +67,15 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup {
   {
+    "nyoom-engineering/oxocarbon.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.cmd.colorscheme("oxocarbon")
+    end
+  },
+  --[[
+  {
     "Mofiqul/adwaita.nvim",
     lazy = false,
     priority = 1000,
@@ -74,6 +83,7 @@ require("lazy").setup {
       vim.cmd("colorscheme adwaita")
     end
   },
+  --]]
   {
     'windwp/nvim-autopairs',
     event = "InsertEnter",
