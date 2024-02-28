@@ -67,11 +67,13 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup {
   {
-    "nyoom-engineering/oxocarbon.nvim",
-    lazy = false,
-    priority = 1000,
+    "mcchrish/zenbones.nvim",
+    dependencies = {
+      "rktjmp/lush.nvim"
+    },
     config = function()
-      vim.cmd.colorscheme("oxocarbon")
+      vim.o.background = "dark";
+      vim.cmd.colorscheme("seoulbones")
     end
   },
   {
@@ -219,7 +221,7 @@ require("lazy").setup {
     cond = vim.loop.os_uname().sysname == "Linux",
     config = function()
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
-      local servers = { "lua_ls", "marksman", "ltex", "nil_ls", "tsserver", "pylsp" }
+      local servers = { "lua_ls", "marksman", "ltex", "nil_ls", "tsserver", "pylsp", "html", "emmet_ls" }
       for _, server in pairs(servers) do
         require("lspconfig")[server].setup {
           capabilities = capabilities,
